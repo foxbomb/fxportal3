@@ -1,0 +1,12 @@
+
+root { 
+    display: block;
+}
+
+section, header {
+    margin: 20px 0 20px 0;
+}
+
+div.hero-unit {
+    padding: 30px 60px 30px 60px;
+}

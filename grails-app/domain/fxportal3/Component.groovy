@@ -2,9 +2,14 @@ package fxportal3
 
 class Component {
     
-    static hasMany = Page_Component
+    static mapping = {        
+        key column: 'fxKey'
+    }
+    
+    static hasMany = PageComponent
 
-    String name
+    String title
+    String key
         
 
 }

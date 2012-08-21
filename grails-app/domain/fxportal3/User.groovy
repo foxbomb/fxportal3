@@ -1,11 +1,16 @@
 package fxportal3
 
 class User {
-
-    static hasMany = [rights:Right]
     
-    String fullName
+    static constraints = {
+        email(unique:true)
+        password(password:true)
+    }
+
+    static hasMany = [permissions:Permission]
+    
     String email
-    String passwordHash
+    String fullName
+    String password
     
 }

@@ -1,4 +1,4 @@
-fxportal2
+fxportal3
 =========
 
-Mobi Web Site Framework with support for MXit
+Open Source Mobi Web Site Framework with support for MXit. See GitHub Pages at http://foxbomb.github.com/fxportal3

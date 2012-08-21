@@ -1,7 +1,18 @@
 class UrlMappings {
 
 	static mappings = {
-		"/" (controller:"user", action:"index")
-		"500" (view:'/error')
+        "/admin" {
+            controller = 'authentication'
+            action = 'index'
+        }
+        "/admin/login" {
+            controller = 'authentication'
+            action = 'login'
+        }
+        "/admin/home" {
+            controller = 'admin'
+            action = 'home'
+        }
+        
 	}
 }

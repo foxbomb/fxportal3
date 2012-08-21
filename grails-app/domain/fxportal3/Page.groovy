@@ -4,6 +4,6 @@ class Page {
     
     String title
     
-    static hasMany = [components:Page_Component]
+    static hasMany = [components:PageComponent]
 
 }
