@@ -3,16 +3,11 @@
     <title>Login</title>
   </head>
   <body>
-    <header>
-      <div class="hero-unit">
-        <h1>fxPortal 3.0</h1>
-        <p class="lead">Content Management Framework for Mobi Sites with Support for MXit</p>
-      </div>
-    </header>
+    <g:include view="includes/adminheader.gsp"/>  
     <section>
       <h2>Login</h2>
       <g:if test="${flash.message}">
-        <div class="alert alert-error">${flash.message}</div>
+        <div class="alert fade in alert-${flash.type}"><button type="button" class="close" data-dismiss="alert">×</button>${flash.message}</div>
       </g:if>
       <g:form controller="authentication" action="login" class="form-horizontal">
         <div class="control-group">

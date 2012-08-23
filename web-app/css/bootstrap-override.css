@@ -1,0 +1,40 @@
+.custom-nav-stacked > .active > a, .custom-nav-stacked > .active > a:hover {
+    background-color: #08C !important;
+    color: white;
+    
+}
+
+.custom-nav-stacked li {
+    width: 248px;
+}
+
+.custom-nav-stacked li a i {
+    float:right;
+}
+
+.custom-nav-stacked li.active a, .custom-nav-stacked li.active a:hover {
+    border: none;
+}
+
+.custom-nav-stacked li.active a small, .custom-nav-stacked li.active a:hover small {
+    color: #eee;
+
+}
+
+.custom-nav-stacked > li > a, .custom-nav-stacked > li > a:hover {
+    
+    color: #08C;
+
+}
+
+.custom-nav-stacked > li > a > small, .custom-nav-stacked > li > a:hover > small {
+    
+    color: #666;
+
+}
+
+.custom-nav-stacked > li > a {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height: 18px;
+}

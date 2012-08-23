@@ -1,12 +1,31 @@
-
-root { 
-    display: block;
-}
+/*** Layhout ***/
 
 section, header {
-    margin: 20px 0 20px 0;
+    margin-top: 20px;
 }
+
+/*** Typography ***/
 
 div.hero-unit {
     padding: 30px 60px 30px 60px;
+}
+
+/*** CMS ***/
+
+li.component {
+    width: 248px;
+    margin-left: 0;
+}
+
+ul#components, ul#page {
+    margin: 0;
+}
+
+.cms-panel {
+    width: 248px;
+    background-color:#f3f3f3; 
+    border-radius: 10px; 
+    -moz-border-radius: 10px; 
+    padding: 10px 10px 10px 10px; 
+    border: 1px solid #e0e0e0
 }

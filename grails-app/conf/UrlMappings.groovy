@@ -5,14 +5,24 @@ class UrlMappings {
             controller = 'authentication'
             action = 'index'
         }
-        "/admin/login" {
+        "/admin/auth/login" {
             controller = 'authentication'
             action = 'login'
         }
-        "/admin/home" {
-            controller = 'admin'
-            action = 'home'
+        "/admin/auth/logout" {
+            controller = 'authentication'
+            action = 'logout'
+        }        
+        "/admin/pages" {
+            controller = 'pages'
         }
+        "/admin/pages/$id" {
+            controller = 'pages'
+        }                
+        
+        "/admin/users" {
+            controller = 'users'
+        }                
         
 	}
 }
