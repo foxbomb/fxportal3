@@ -6,7 +6,7 @@ class Component {
         key column: 'fxKey'
     }
     
-    static hasMany = PageComponent
+    static hasMany = [components:PageComponent]
 
     String title
     String key

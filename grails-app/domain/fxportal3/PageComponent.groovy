@@ -6,8 +6,8 @@ class PageComponent {
         table: 'page_component'
     }    
     
-    static belongsTo = Page, Component
-    static hasMany = [contents:Content]
+    static belongsTo = [page: Page, component: Component]
+    static hasMany = [contents: Content]
     
     String title
 

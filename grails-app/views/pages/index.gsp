@@ -13,7 +13,8 @@
         
         // Drag and Drop
         
-        var dropHereDisplayed = true;
+        var dropHereDisplayed = false;
+        checkDisplay();
 
         $("#components li").draggable({
           connectToSortable: '#page',
@@ -39,18 +40,19 @@
           
           $(this).parent().hide(250, function(){
             $(this).remove();
-            if ($("#page li.component").size() == 0) {
-              $('.cms-panel div.drag-text').fadeTo(250, 0.5);
-              dropHereDisplayed = true;
-              
-            }        
-            
+            checkDisplay();
           });
           
           
         }}, 'a.remove-component');
-        
-        
+
+        function checkDisplay() {
+          if ($("#page li.component").size() == 0) {
+              $('.cms-panel div.drag-text').fadeTo(250, 0.5);
+              dropHereDisplayed = true;              
+            }
+        }
+
       });
     </script>
   </head>
@@ -125,13 +127,11 @@
         <div class="span3 cms-panel">
           <h3>2. Your components</h3>
           <ul id="components">
-            <li class="btn btn-large btn-block component">Plain Text<a class="remove-component"><i class="icon-remove icon-white"></i></a></li>
-            <li class="btn btn-large btn-block component">Html<a class="close"><i class="icon-remove"></i></a></li>
-            <li class="btn btn-large btn-block component">Form<a class="close"><i class="icon-remove"></i></a></li>
-            <li class="btn btn-large btn-block component">Quiz<a class="close"><i class="icon-remove"></i></a></li>
-            <li class="btn btn-large btn-block component">Header<a class="close"><i class="icon-remove"></i></a></li>
-            <li class="btn btn-large btn-block component">Footer<a class="close"><i class="icon-remove"></i></a></li>
-            <li class="btn btn-large btn-block component">Menu<a class="close"><i class="icon-remove"></i></a></li>
+            
+             <g:each in="${components}">
+                <li class="btn btn-large btn-block component">${it.title}<a class="remove-component"><i class="icon-remove icon-white"></i></a></li>                
+             </g:each>              
+            
           </ul>
 
         </div>
@@ -143,6 +143,10 @@
           <input id="url" name="url" type="text" placeholder="url"/>          
           <div class="drag-text">Drag your components here...</div>
           <ul id="page" style="position:relative">
+            
+             <g:each in="${pageComponents}">
+                <li class="btn-success btn-large btn-block component"><span class="component-label label label-inverse">${it.component.title}</span> ${it.title}<a class="remove-component"><i class="icon-remove icon-white"></i></a></li>                
+             </g:each>              
             
           </ul>          
           <g:link controller="pages" data-toggle="modal" class="btn btn-primary save-button"><i class="icon-plus icon-white"></i> Save Page</a></g:link>

@@ -58,6 +58,12 @@ ul#components, ul#page {
     padding:10px;
     text-align: center;
     margin-bottom: -50px;
+    display: none;
+}
+
+.cms-panel .component-label {
+    
+    
 }
 
 #page {

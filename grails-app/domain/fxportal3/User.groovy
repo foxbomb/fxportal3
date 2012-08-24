@@ -7,7 +7,7 @@ class User {
         password(password:true)
     }
 
-    static hasMany = [permissions:Permission]
+    static hasMany = [userPermissions:UserPermission]
     
     String email
     String fullName

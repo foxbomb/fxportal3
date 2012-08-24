@@ -7,7 +7,7 @@ class Content {
         value column: 'fxValue'
     }    
 
-    static belongsTo = PageComponent
+    static belongsTo = [pageComponent: PageComponent]
     
     String title
     String key
