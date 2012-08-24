@@ -12,9 +12,16 @@ div.hero-unit {
 
 /*** CMS ***/
 
+ul#components li.component a.close {
+    display:none;
+}
+
 li.component {
     width: 248px;
     margin-left: 0;
+    text-align:left;
+    padding-left:10px;
+    padding-right:5px;
 }
 
 ul#components, ul#page {
@@ -28,4 +35,29 @@ ul#components, ul#page {
     -moz-border-radius: 10px; 
     padding: 10px 10px 10px 10px; 
     border: 1px solid #e0e0e0
+}
+
+.cms-panel input[type=text] {
+    width: 234px;
+}
+
+.cms-panel div.drag-text {
+    background-color: black;
+    opacity: 0.5;    
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    color: white;
+    font-size:18px;
+    font-weight: bold;
+    padding:10px;
+    text-align: center;
+    margin-bottom: -50px;
+}
+
+#page {
+    min-height: 50px;
+}
+
+.cms-panel .save-button {
+    margin-top: 10px;
 }

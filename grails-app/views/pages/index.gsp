@@ -7,16 +7,33 @@
       #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
     </style>
     
-    <!-- Drag & Drop Script -->
+    
     <script>
       $(function() {
+        
+        // Drag and Drop
 
         $("#components li").draggable({
           connectToSortable: '#page',
           helper: 'clone'
         })
         
-        $("#page").sortable();
+        $("#page").sortable({
+          update: function() {
+            $('.cms-panel div.drag-text').fadeTo(250, 0);
+            $("#page").css("height", "");
+          }
+        });
+        
+        // Close Buttons
+        
+        $("a.close").live('click', function(){          
+          $(this).parent().remove();
+          if ($("#page li.component").size() == 0) {
+            $('.cms-panel div.drag-text').fadeTo(250, 0.5);
+          }
+          
+        })
         
       });
     </script>
@@ -92,13 +109,13 @@
         <div class="span3 cms-panel">
           <h3>2. Your components</h3>
           <ul id="components">
-            <li class="btn btn-large btn-block component">Plain Text</li>
-            <li class="btn btn-large btn-block component">Html</li>
-            <li class="btn btn-large btn-block component">Form</li>
-            <li class="btn btn-large btn-block component">Quiz</li>
-            <li class="btn btn-large btn-block component">Header</li>
-            <li class="btn btn-large btn-block component">Footer</li>
-            <li class="btn btn-large btn-block component">Menu</li>
+            <li class="btn btn-large btn-block component">Plain Text<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Html<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Form<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Quiz<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Header<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Footer<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Menu<a class="close"><i class="icon-remove"></i></a></li>
           </ul>
 
         </div>
@@ -106,14 +123,13 @@
         <!-- 3. Build Your Page -->
         <div class="span3 cms-panel">
           <h3>3. Build your page </h3>
-          <input type="text">
-          <input type="text">
-          <ul id="page">
-            <li class="btn btn-large btn-block component">Item 1</li>
-            <li class="btn btn-large btn-block component">Item 2</li>
-          </ul>
-          <input type="checkbox"> Published<br/>
-          <g:link controller="pages" data-toggle="modal" class="btn btn-primary"><i class="icon-plus icon-white"></i> Save Page</a></g:link>
+          <input id="title" name="title" type="text" placeholder="title"/>
+          <input id="url" name="url" type="text" placeholder="url"/>          
+          <div class="drag-text">Drag your components here...</div>
+          <ul id="page" style="position:relative">
+            
+          </ul>          
+          <g:link controller="pages" data-toggle="modal" class="btn btn-primary save-button"><i class="icon-plus icon-white"></i> Save Page</a></g:link>
         </div>
 
         <!-- 4. Preview -->
