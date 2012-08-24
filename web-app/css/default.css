@@ -12,9 +12,15 @@ div.hero-unit {
 
 /*** CMS ***/
 
-ul#components li.component a.close {
+ul#components li.component a.remove-component {
     display:none;
 }
+
+ul#page li.component a.remove-component {
+    float: right;
+    cursor: pointer;
+}
+
 
 li.component {
     width: 248px;

@@ -12,6 +12,8 @@
       $(function() {
         
         // Drag and Drop
+        
+        var dropHereDisplayed = true;
 
         $("#components li").draggable({
           connectToSortable: '#page',
@@ -20,20 +22,34 @@
         
         $("#page").sortable({
           update: function() {
-            $('.cms-panel div.drag-text').fadeTo(250, 0);
-            $("#page").css("height", "");
+            if (dropHereDisplayed == true) {
+              $('.cms-panel div.drag-text').fadeTo(250, 0);
+              $("#page").css("height", "");
+              dropHereDisplayed = false;
+            }
+          },
+          receive: function() {
+            $(this).find(".btn").addClass('btn-success').removeClass('btn');            
           }
         });
         
         // Close Buttons
-        
-        $("a.close").live('click', function(){          
-          $(this).parent().remove();
-          if ($("#page li.component").size() == 0) {
-            $('.cms-panel div.drag-text').fadeTo(250, 0.5);
-          }
+                
+        $("ul#page").on({'click' : function() {          
           
-        })
+          $(this).parent().hide(250, function(){
+            $(this).remove();
+            if ($("#page li.component").size() == 0) {
+              $('.cms-panel div.drag-text').fadeTo(250, 0.5);
+              dropHereDisplayed = true;
+              
+            }        
+            
+          });
+          
+          
+        }}, 'a.remove-component');
+        
         
       });
     </script>
@@ -109,7 +125,7 @@
         <div class="span3 cms-panel">
           <h3>2. Your components</h3>
           <ul id="components">
-            <li class="btn btn-large btn-block component">Plain Text<a class="close"><i class="icon-remove"></i></a></li>
+            <li class="btn btn-large btn-block component">Plain Text<a class="remove-component"><i class="icon-remove icon-white"></i></a></li>
             <li class="btn btn-large btn-block component">Html<a class="close"><i class="icon-remove"></i></a></li>
             <li class="btn btn-large btn-block component">Form<a class="close"><i class="icon-remove"></i></a></li>
             <li class="btn btn-large btn-block component">Quiz<a class="close"><i class="icon-remove"></i></a></li>
