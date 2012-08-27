@@ -14,12 +14,17 @@ class PagesController { //extends AdminController {
     def index() {
         //authorize()
         
+        
+        
         def selectedId = 0;
+        def pageComponents = null;
+        
         try {
             selectedId = Long.valueOf(params.id)
+            pageComponents = PageComponent.where{page.id == selectedId}
         } catch (Exception ex) {}
         
-        def pageComponents = PageComponent.where{page.id == selectedId}
+        
         
         ['pages': Page.list(), 'selectedId': selectedId, 'components': Component.list(), 'pageComponents': pageComponents]
         
