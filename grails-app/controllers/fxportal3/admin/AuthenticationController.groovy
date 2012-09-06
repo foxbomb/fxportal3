@@ -1,11 +1,13 @@
-package fxportal3
+package fxportal3.admin
+
+import fxportal3.User
 
 class AuthenticationController {
 
     static layout = "admin"
     
     def index() {
-        // Render default
+        render(view:"/authentication/index")
     }
     
     def login() {

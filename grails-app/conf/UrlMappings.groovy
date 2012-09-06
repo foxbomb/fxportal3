@@ -1,9 +1,12 @@
 class UrlMappings {
 
 	static mappings = {
+        "/" {
+            view = '/index'
+        }
         "/admin" {
-            controller = 'authentication'
-            action = 'index'
+            controller = "authentication"
+            action = "index"
         }
         "/admin/auth/login" {
             controller = 'authentication'
@@ -19,10 +22,15 @@ class UrlMappings {
         "/admin/pages/$id" {
             controller = 'pages'
         }                
-        
         "/admin/users" {
             controller = 'users'
-        }                
+        }              
+        "500" {
+            view = '/error' 
+        }
+        "404" {
+            view = '/404'
+        }
         
 	}
 }

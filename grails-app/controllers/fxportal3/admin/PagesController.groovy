@@ -4,17 +4,16 @@ import fxportal3.Component
 import fxportal3.Page
 import fxportal3.PageComponent
 
-import fxportal3.system.AdminController
+import fxportal3.system.GenericSecurityController
 
 
-class PagesController { //extends AdminController {
+class PagesController extends GenericSecurityController {
     
     static layout = "admin"
 
     def index() {
-        //authorize()
         
-        
+        authorize();
         
         def selectedId = 0;
         def pageComponents = null;
@@ -23,8 +22,6 @@ class PagesController { //extends AdminController {
             selectedId = Long.valueOf(params.id)
             pageComponents = PageComponent.where{page.id == selectedId}
         } catch (Exception ex) {}
-        
-        
         
         ['pages': Page.list(), 'selectedId': selectedId, 'components': Component.list(), 'pageComponents': pageComponents]
         

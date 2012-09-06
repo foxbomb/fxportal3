@@ -1,6 +1,6 @@
 package fxportal3.system
 
-class AdminController {
+class GenericSecurityController {
 
     def index() {}
     
