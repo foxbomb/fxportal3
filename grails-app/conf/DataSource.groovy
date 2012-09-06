@@ -18,20 +18,17 @@ environments {
             url = "jdbc:mysql://localhost/fxportal3"            
         }
     }
-    test {
-        dataSourcee {
-            username="b5149526887d72"
-            password="d6f06a38"
-            dbCreate = "create-drop"
-            host="jdbc:mysql://us-cdbr-east.cleardb.com/heroku_c51a83649879755"
-        }        
-    }
     production {
         dataSourcee {
-            username="b5149526887d72"
-            password="d6f06a38"
-            dbCreate = "create-drop"
-            host="jdbc:mysql://us-cdbr-east.cleardb.com/heroku_c51a83649879755"
+        dbCreate = "create-drop"
+        driverClassName = "com.mysql.jdbc.Driver"
+        dialect = org.hibernate.dialect.MySQLDialect
+    
+        uri = new URI(System.env.CLEARDB_DATABASE_URL)
+
+        url = "jdbc:mysql://" + uri.host + uri.path
+        username = uri.userInfo.split(":")[0]
+        password = uri.userInfo.split(":")[1]
         }
     }
 }
