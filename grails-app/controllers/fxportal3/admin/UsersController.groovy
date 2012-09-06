@@ -1,4 +1,4 @@
-package fxportal3.pages
+package fxportal3.admin
 
 import fxportal3.system.GenericSecurityController
 
