@@ -22,7 +22,9 @@ environments {
         dataSource {
             username = "b5149526887d72"
             password = "d6f06a38"
-            dbCreate = "update"
+            dbCreate = "create-drop"
+            logSql = true
+            formatSql = true
             url = "jdbc:mysql://us-cdbr-east.cleardb.com/heroku_c51a83649879755"                        
         }
     }
