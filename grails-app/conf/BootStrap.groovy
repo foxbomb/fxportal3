@@ -14,6 +14,8 @@ class BootStrap {
     def init = { servletContext ->
         
         switch (GrailsUtil.environment) {
+            
+            case "production":
             case "development":
             
                 // Create Users
@@ -60,7 +62,7 @@ class BootStrap {
                 
             break;
             
-            case "production":
+            
             break;
         }
         
