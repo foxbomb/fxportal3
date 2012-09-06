@@ -19,16 +19,16 @@ environments {
         }
     }
     production {
-        dataSourcee {
-        dbCreate = "create-drop"
-        driverClassName = "com.mysql.jdbc.Driver"
-        dialect = org.hibernate.dialect.MySQLDialect
-    
-        uri = new URI(System.env.CLEARDB_DATABASE_URL)
+        dataSource {
+            dbCreate = "create-drop"
+            driverClassName = "com.mysql.jdbc.Driver"
+            dialect = org.hibernate.dialect.MySQLDialect
 
-        url = "jdbc:mysql://" + uri.host + uri.path
-        username = uri.userInfo.split(":")[0]
-        password = uri.userInfo.split(":")[1]
+            uri = new URI(System.env.CLEARDB_DATABASE_URL)
+
+            url = "jdbc:mysql://" + uri.host + uri.path
+            username = uri.userInfo.split(":")[0]
+            password = uri.userInfo.split(":")[1]
         }
     }
 }
