@@ -22,7 +22,7 @@ environments {
         dataSource {
             dbCreate = "create-drop"
             driverClassName = "com.mysql.jdbc.Driver"
-            dialect = org.hibernate.dialect.MySQLDialect
+            dialect = "org.hibernate.dialect.MySQLDialect"
 
             uri = new URI(System.env.CLEARDB_DATABASE_URL)
 
