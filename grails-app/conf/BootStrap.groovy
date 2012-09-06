@@ -7,8 +7,6 @@ import fxportal3.User
 import fxportal3.UserPermission
 import grails.util.GrailsUtil
 
-
-
 class BootStrap {
 
     def init = { servletContext ->

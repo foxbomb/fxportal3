@@ -22,8 +22,8 @@ environments {
         dataSource {
             username = "b5149526887d72"
             password = "d6f06a38"
-            dbCreate = "create-drop"
-            url = "jdbc:mysql://us-cdbr-east.cleardb.com/heroku_c51a83649879755?reconnect=true"                        
+            dbCreate = "update"
+            url = "jdbc:mysql://us-cdbr-east.cleardb.com/heroku_c51a83649879755"                        
         }
     }
 }
