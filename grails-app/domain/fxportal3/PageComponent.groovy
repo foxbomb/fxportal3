@@ -9,6 +9,6 @@ class PageComponent {
     static belongsTo = [page: Page, component: Component]
     static hasMany = [contents: Content]
     
-    String title
+    String friendlyName
 
 }

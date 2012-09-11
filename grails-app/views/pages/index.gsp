@@ -36,14 +36,18 @@
             if (elem.attr("id")) {
               console.log ("existing");
             } else {
-              elem.attr("id", "page-component-" + ++currentId)              
+              elem.attr("id", "temp-page-component-id-" + ++currentId)              
               var type = ui.item.text();
-              var badge = $('<span class="component-label label label-inverse">' + type + '</span>');
-              var close = $('<a class="remove-component"><i class="icon-remove icon-white"></i></a>')
-              elem.text(" Untitled");
+              var badge = $('<span class="component-label label label-inverse">' + type + '</span>');                            
+              var edit = $('<a class="edit-component"><i class="icon-edit icon-white"></i></a>')
+              var close = $('<a class="remove-component"><i class="icon-remove icon-white"></i></a>');
+              
+              elem.find("span.friendly-name").text("Untitled");
               elem.addClass("btn-success");
               elem.prepend(badge);
               elem.append(close);
+              elem.append(edit);
+
             }
             
           }
@@ -56,10 +60,55 @@
           $(this).parent().hide(250, function(){
             $(this).remove();
             checkDisplay();
-          });
-          
+          });          
           
         }}, 'a.remove-component');
+        
+        // Edit Buttons
+        
+        $("ul#page").on({'click' : function() {          
+          
+          
+          var li = $(this).closest("li");
+          
+          var id = li.attr("id");
+          var title = li.attr("data-component-title");
+          var friendlyName = li.attr("data-component-friendlyname");
+          var key = li.attr("data-component-key");
+          
+          $('#component-title').text(title);
+          $('#component-friendlyname').text(friendlyName);
+          $('#component-key').text(key);
+          $('#input-friendlyname').val(friendlyName);
+          $('#input-parent-id').val(id);
+          
+          $("#edit-modal").modal();
+          
+          
+        }}, 'a.edit-component');
+      
+        // Modal Buttons
+        
+        $('#input-friendlyname').keyup(function() {
+          $('#component-friendlyname').text($(this).val());
+        })
+        
+        $('#input-done').click(function() {
+          console.log("click");
+          var parentId = $('#input-parent-id').val();
+          var friendlyName = $('#input-friendlyname').val();
+          console.log (friendlyName);
+          
+          var parent = $('#' + parentId)
+          parent.attr("data-component-friendlyname", friendlyName);
+          parent.find(".friendly-name").text(friendlyName);
+          
+          $('#edit-modal').modal('hide');
+        })
+        
+        
+      
+        // Show or Hide the "Drag your components here...""
 
         function checkDisplay() {
           if ($("#page li.component").size() == 0) {
@@ -144,7 +193,7 @@
           <ul id="components">
             
              <g:each in="${components}">
-                <li class="btn btn-large btn-block component">${it.title}<a class="remove-component"><i class="icon-remove icon-white"></i></a></li>                
+                <li class="btn btn-large btn-block component" data-component-key="${it.key}" data-component-title="${it.title}" data-component-friendlyname="Untitled"> <span class="friendly-name">${it.title}</span></li>                
              </g:each>              
             
           </ul>
@@ -160,7 +209,7 @@
           <ul id="page" style="position:relative">
             
              <g:each in="${pageComponents}">
-                <li class="btn-success btn-large btn-block component"><span class="component-label label label-inverse">${it.component.title}</span> ${it.title}<a class="remove-component"><i class="icon-remove icon-white"></i></a></li>                
+                <li id="page-component-id-${it.id}" class="btn-success btn-large btn-block component" data-component-key="${it.component.key}" data-component-title="${it.component.title}" data-component-friendlyname="${it.friendlyName}"><span class="component-label label label-inverse">${it.component.title}</span> <span class="friendly-name">${it.friendlyName}</span><a class="remove-component"><i class="icon-remove icon-white"></i></a><a class="edit-component"><i class="icon-edit icon-white"></i></a></li>                
              </g:each>              
             
           </ul>          
@@ -174,6 +223,8 @@
 
       </div>
     </section>
-
+    <div>
+      <g:include view="/pages/_edit.gsp"></g:include>
+    </div>
   </body>
 </html>

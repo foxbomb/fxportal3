@@ -1,4 +1,4 @@
-/*** Layhout ***/
+/*** Layout ***/
 
 section, header {
     margin-top: 20px;
@@ -16,7 +16,8 @@ ul#components li.component a.remove-component {
     display:none;
 }
 
-ul#page li.component a.remove-component {
+ul#page li.component a.remove-component,
+ul#page li.component a.edit-component {
     float: right;
     cursor: pointer;
 }

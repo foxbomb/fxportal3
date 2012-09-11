@@ -43,11 +43,11 @@ class BootStrap {
                 
                 // Associate some Components to some Pages and give them some Content
                 
-                new PageComponent(title: "Loan Adviser", page: home, component: header)
+                new PageComponent(friendlyName: "Loan Adviser", page: home, component: header)
                     .addToContents(new Content(title:"Header Name", key: "header_name", value: "Loan Adviser"))
                     .addToContents(new Content(title:"Slogan", key: "header_slogan", value: "Rate and review personal loans"))
                     .save()
-                new PageComponent(title: "Welcome Text", page: home, component: text).save()
+                new PageComponent(friendlyName: "Welcome Text", page: home, component: text).save()
                     .addToContents(new Content(title:"Text", key: "text", value: "Welcome to Loan Adviser. Don't forget to give us your feedback in the Submit a Comment section!"))
                     .save()
                     
