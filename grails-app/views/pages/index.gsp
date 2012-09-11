@@ -6,12 +6,12 @@
       #sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
       #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
     </style>
-    
-    
     <script>
       $(function() {
         
         // Drag and Drop
+        
+        var currentId = 0;
         
         var dropHereDisplayed = false;
         checkDisplay();
@@ -29,8 +29,23 @@
               dropHereDisplayed = false;
             }
           },
-          receive: function() {
-            $(this).find(".btn").addClass('btn-success').removeClass('btn');            
+          stop: function(evt, ui) {
+            
+            var elem = ui.item;
+            
+            if (elem.attr("id")) {
+              console.log ("existing");
+            } else {
+              elem.attr("id", "page-component-" + ++currentId)              
+              var type = ui.item.text();
+              var badge = $('<span class="component-label label label-inverse">' + type + '</span>');
+              var close = $('<a class="remove-component"><i class="icon-remove icon-white"></i></a>')
+              elem.text(" Untitled");
+              elem.addClass("btn-success");
+              elem.prepend(badge);
+              elem.append(close);
+            }
+            
           }
         });
         
