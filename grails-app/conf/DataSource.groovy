@@ -2,6 +2,12 @@ dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
     dialect = "org.hibernate.dialect.MySQLDialect"
+    properties { 
+       validationQuery="select 1" 
+       testWhileIdle=true 
+       timeBetweenEvictionRunsMillis=60000 
+    }     
+    
 }
 hibernate {
     cache.use_second_level_cache = true
