@@ -9,9 +9,26 @@
     <script>
       $(function() {
         
+        // Populate Default values to existing items
+
+        var elements = $("ul#page li");
+        $.each(elements, function(index, elem) {
+          var data = {};
+          data.general = {}
+          data.general.id = $(elem).attr("id");
+          data.general.new = false;
+          data.general.edited = false;
+          data.general.title = $(elem).attr("data-component-title");
+          data.general.friendlyName = $(elem).attr("data-component-friendlyname");
+          data.general.key = $(elem).attr("data-component-key");;
+          $(elem).data(data);
+        });        
+        
+        
         // Drag and Drop
         
         var currentId = 0;
+        var currentComponent = null;
         
         var dropHereDisplayed = false;
         checkDisplay();
@@ -33,10 +50,10 @@
             
             var elem = ui.item;
             
-            if (elem.attr("id")) {
-              console.log ("existing");
+            if (elem.data().general) {
+              // existing
             } else {
-              elem.attr("id", "temp-page-component-id-" + ++currentId)              
+
               var type = ui.item.text();
               var badge = $('<span class="component-label label label-inverse">' + type + '</span>');                            
               var edit = $('<a class="edit-component"><i class="icon-edit icon-white"></i></a>')
@@ -48,12 +65,23 @@
               elem.append(close);
               elem.append(edit);
 
+              var data = {};
+              data.general = {}
+              data.general.id = null;              
+              data.general.new = true;
+              data.general.edited = false;
+              data.general.title = elem.attr("data-component-title");
+              data.general.friendlyName = elem.attr("data-component-friendlyname");
+              data.general.key = elem.attr("data-component-key");;
+              
+              elem.data(data);
+
             }
             
           }
         });
         
-        // Close Buttons
+        // Remove Button
                 
         $("ul#page").on({'click' : function() {          
           
@@ -64,24 +92,20 @@
           
         }}, 'a.remove-component');
         
-        // Edit Buttons
+        // Edit Button
         
         $("ul#page").on({'click' : function() {          
           
           
-          var li = $(this).closest("li");
+          currentComponent = $(this).closest("li");
           
-          var id = li.attr("id");
-          var title = li.attr("data-component-title");
-          var friendlyName = li.attr("data-component-friendlyname");
-          var key = li.attr("data-component-key");
-          
-          $('#component-title').text(title);
-          $('#component-friendlyname').text(friendlyName);
-          $('#component-key').text(key);
-          $('#input-friendlyname').val(friendlyName);
-          $('#input-parent-id').val(id);
-          
+          var data = currentComponent.data();
+                    
+          $('#component-title').text(data.general.title);
+          $('#component-friendlyname').text(data.general.friendlyName);
+          $('#component-key').text(data.general.key);
+          $('#input-friendlyname').val(data.general.friendlyName);
+
           $("#edit-modal").modal();
           
           
@@ -93,22 +117,25 @@
           $('#component-friendlyname').text($(this).val());
         })
         
+        // DONE
+        
         $('#input-done').click(function() {
-          console.log("click");
-          var parentId = $('#input-parent-id').val();
-          var friendlyName = $('#input-friendlyname').val();
-          console.log (friendlyName);
           
-          var parent = $('#' + parentId)
-          parent.attr("data-component-friendlyname", friendlyName);
-          parent.find(".friendly-name").text(friendlyName);
+          var data = currentComponent.data();
+          data.general.friendlyName = $('#input-friendlyname').val();
+          data.general.edited = true;
+          currentComponent.data(data);
+          currentComponent.find("span.friendly-name").text(data.general.friendlyName);
           
           $('#edit-modal').modal('hide');
-        })
+        });
         
-        
+        $('.modal-close').click(function() {          
+          $("#edit-modal").modal('hide');
+          currentComponent = null;
+        });
       
-        // Show or Hide the "Drag your components here...""
+        // Show or Hide the "Drag your components here..."
 
         function checkDisplay() {
           if ($("#page li.component").size() == 0) {
@@ -116,6 +143,17 @@
               dropHereDisplayed = true;              
             }
         }
+        
+        // Prepare data for AJAX Submit
+        
+        $("#page-components").submit(function(evt) {
+          evt.preventDefault();
+          var elements = $("ul#page li");
+          $.each(elements, function(index, elem) {
+            console.log ($(elem).data().general);
+          });
+          return false;
+        });
 
       });
     </script>
@@ -128,14 +166,14 @@
     <!-- Flash Messages -->
     <g:if test="${flash.message}">
       <section>              
-        <div class="alert alert-${flash.type} fade in"><button type="button" class="close" data-dismiss="alert">×</button>${flash.message}</div>
+        <div class="alert alert-${flash.type} fade in"><button type="button" class="close" data-dismiss="alert">&times;</button>${flash.message}</div>
       </section>          
     </g:if>  
     
     <g:if test="${!selectedId}">  
       <section>
         <div class="alert alert-info fade in">
-          <button type="button" class="close" data-dismiss="alert">×</button>    
+          <button  type="button" class="close" data-dismiss="alert">×</button>    
           <strong>Create New Page Mode:</strong> You are in create mode. Use the <em>Your Components</em> area to drag components to the <em>Build your page</em> area. To rather edit a page, select a page under the <em>Choose a page</em> area.
         </div>  
       </section>        
@@ -143,7 +181,7 @@
     <g:else>
       <section>
         <div class="alert alert-info fade in">
-          <button type="button" class="close" data-dismiss="alert">×</button>    
+          <button type="button" class="close" data-dismiss="alert">&times;</button>    
           <strong>Edit Page Mode:</strong> You are in edit mode. Edit the selected page in the <em>Build your page</em> area. To rather create a new page, hit the <em>Create New Page</em> button below.   
         </div>  
       </section>            
@@ -203,17 +241,21 @@
         <!-- 3. Build Your Page -->
         <div class="span3 cms-panel">
           <h3>3. Build your page </h3>
-          <input id="title" name="title" type="text" placeholder="title"/>
-          <input id="url" name="url" type="text" placeholder="url"/>          
-          <div class="drag-text">Drag your components here...</div>
-          <ul id="page" style="position:relative">
+          
+          <g:form id="page-components" url="[controller:'pages', action:'save', id:selectedId]">
+            <input id="title" name="title" type="text" placeholder="title"/>
+            <input id="url" name="url" type="text" placeholder="url"/>          
+            <div class="drag-text">Drag your components here...</div>
+            <ul id="page" style="position:relative">
+
+               <g:each in="${pageComponents}">
+                  <li id="${it.id}" class="btn-success btn-large btn-block component" data-component-key="${it.component.key}" data-component-title="${it.component.title}" data-component-friendlyname="${it.friendlyName}"><span class="component-label label label-inverse">${it.component.title}</span> <span class="friendly-name">${it.friendlyName}</span><a class="remove-component"><i class="icon-remove icon-white"></i></a><a class="edit-component"><i class="icon-edit icon-white"></i></a></li>                
+               </g:each>              
+
+            </ul>          
             
-             <g:each in="${pageComponents}">
-                <li id="page-component-id-${it.id}" class="btn-success btn-large btn-block component" data-component-key="${it.component.key}" data-component-title="${it.component.title}" data-component-friendlyname="${it.friendlyName}"><span class="component-label label label-inverse">${it.component.title}</span> <span class="friendly-name">${it.friendlyName}</span><a class="remove-component"><i class="icon-remove icon-white"></i></a><a class="edit-component"><i class="icon-edit icon-white"></i></a></li>                
-             </g:each>              
-            
-          </ul>          
-          <g:link controller="pages" data-toggle="modal" class="btn btn-primary save-button"><i class="icon-plus icon-white"></i> Save Page</a></g:link>
+            <button type="submit" class="btn btn-primary save-button"><i class="icon-plus icon-white"></i>Save Page</button>
+          </g:form>
         </div>
 
         <!-- 4. Preview -->
