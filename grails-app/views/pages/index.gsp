@@ -24,6 +24,9 @@
           $(elem).data(data);
         });        
         
+        // Delete List
+        
+        var removed = [];
         
         // Drag and Drop
         
@@ -86,6 +89,10 @@
         $("ul#page").on({'click' : function() {          
           
           $(this).parent().hide(250, function(){
+            var id = $(this).data().general.id;
+            if (id != null) {
+              removed.push(id);
+            }
             $(this).remove();
             checkDisplay();
           });          
@@ -147,12 +154,22 @@
         // Prepare data for AJAX Submit
         
         $("#page-components").submit(function(evt) {
-          evt.preventDefault();
+          
+          var updated = [];
+          
           var elements = $("ul#page li");
           $.each(elements, function(index, elem) {
-            console.log ($(elem).data().general);
+            updated.push ($(elem).data().general);
           });
-          return false;
+          
+          var data = {}
+          data.updated = updated
+          data.removed = removed
+          
+          $("form#page-components").find("input#data").val(JSON.stringify(data));
+                    
+          console.log (data)
+          
         });
 
       });
@@ -170,7 +187,7 @@
       </section>          
     </g:if>  
     
-    <g:if test="${!selectedId}">  
+    <g:if test="${!page.id}">  
       <section>
         <div class="alert alert-info fade in">
           <button  type="button" class="close" data-dismiss="alert">×</button>    
@@ -194,13 +211,13 @@
         <!-- 1. Choose a page -->
         <div class="span3 cms-panel">
           <h3>1. Choose a page</h3>
-          <g:if test="${selectedId}">  
-            <g:link controller="pages" data-toggle="modal" class="btn btn-primary"><i class="icon-plus icon-white"></i> Create New Page</a></g:link>
+          <g:if test="${page.id}">  
+            <g:link controller="pages" data-toggle="modal" class="btn btn-primary"><i class="icon-plus icon-white"></i>&nbsp;Create New Page</a></g:link>
           </g:if>  
           <section>
             <ul class="nav nav-tabs nav-stacked custom-nav-stacked">                        
 
-              <g:if test="${!selectedId}">  
+              <g:if test="${!page.id}">  
 
                 <li class="active">                  
                   <g:link controller="pages" action="index" id="-1">
@@ -213,7 +230,7 @@
               </g:if>
               
               <g:each in="${pages}">
-                <li class="${it.id == selectedId ? 'active' : ''}">
+                <li class="${it.id == page.id ? 'active' : ''}">
                 <g:link controller="pages" action="index" id="${it.id}">
                   <i class="icon-chevron-right"></i>
                   ${it.title}<br/>
@@ -242,9 +259,11 @@
         <div class="span3 cms-panel">
           <h3>3. Build your page </h3>
           
-          <g:form id="page-components" url="[controller:'pages', action:'save', id:selectedId]">
-            <input id="title" name="title" type="text" placeholder="title"/>
-            <input id="url" name="url" type="text" placeholder="url"/>          
+          <g:form id="page-components" url="[controller:'pages', action:'save', id:page.id]" class="inline-form">
+            <input id="title" name="title" type="text" placeholder="title" value="${page.title}"/>
+            <input id="url" name="url" type="text" placeholder="url" value="${page.url}"/>
+            <input id="data" name="data" type="hidden"/>
+            <input id="pageId" name="pageId" type="hidden" value="${page.id}"/>
             <div class="drag-text">Drag your components here...</div>
             <ul id="page" style="position:relative">
 
@@ -254,8 +273,13 @@
 
             </ul>          
             
-            <button type="submit" class="btn btn-primary save-button"><i class="icon-plus icon-white"></i>Save Page</button>
+            <button type="submit" class="btn btn-primary save-button"><i class="icon-plus icon-white"></i>&nbsp;Save Page</button>            
           </g:form>
+          <g:if test="${page.id != 0}">
+            <g:form id="page-components" url="[controller:'pages', action:'delete', id:page.id]" class="inline-form">
+              <button type="submit" class="btn btn-danger save-button"><i class="icon-remove icon-white"></i>&nbsp;Delete Page</button>
+            </g:form>
+          </g:if>
         </div>
 
         <!-- 4. Preview -->

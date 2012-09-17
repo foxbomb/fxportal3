@@ -26,7 +26,12 @@ class UrlMappings {
         "/admin/pages/$id/save" {
             controller = 'pages'
             action = 'save'
-        }                
+        }
+        
+        "/admin/pages/$id/delete" {
+            controller = 'pages'
+            action = 'delete'
+        }          
         
         "/admin/users" {
             controller = 'users'
