@@ -10,6 +10,5 @@ class Component {
 
     String title
     String key
-        
 
 }

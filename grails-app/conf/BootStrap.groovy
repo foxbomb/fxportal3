@@ -31,23 +31,24 @@ class BootStrap {
                 
                 // Create Some Components
                 
-                def text = new Component(title: "Text", key: "com.foxbomb.fxportal3.component.Text").save()
-                def menu = new Component(title: "Menu", key: "com.foxbomb.fxportal3.component.Menu").save()    
-                def header = new Component(title: "Header", key: "com.foxbomb.fxportal3.component.Header").save()
+                def text = new Component(title: "Text", key: "com.foxbomb.fxportal3.component.text").save()
+                def menu = new Component(title: "Menu", key: "com.foxbomb.fxportal3.component.menu").save()    
+                def header = new Component(title: "Header", key: "com.foxbomb.fxportal3.component.header").save()
                 
-                new Component(title: "Html", key: "com.foxbomb.fxportal3.component.Html").save()                
-                new Component(title: "Footer", key: "com.foxbomb.fxportal3.component.Footer").save()
-                new Component(title: "Quiz", key: "com.foxbomb.fxportal3.component.Quiz").save()
-                new Component(title: "FAQ", key: "com.foxbomb.fxportal3.component.FAQ").save()
-                new Component(title: "List", key: "com.foxbomb.fxportal3.component.List").save()
+                new Component(title: "Html", key: "com.foxbomb.fxportal3.component.html").save()                
+                new Component(title: "Footer", key: "com.foxbomb.fxportal3.component.footer").save()
+                new Component(title: "Quiz", key: "com.foxbomb.fxportal3.component.quiz").save()
+                new Component(title: "FAQ", key: "com.foxbomb.fxportal3.component.faq").save()
+                new Component(title: "List", key: "com.foxbomb.fxportal3.component.list").save()
                 
                 // Associate some Components to some Pages and give them some Content
-                
+                            
                 new PageComponent(friendlyName: "Loan Adviser", page: home, component: header)
-                    .addToContents(new Content(title:"Header Name", key: "header_name", value: "Loan Adviser"))
-                    .addToContents(new Content(title:"Slogan", key: "header_slogan", value: "Rate and review personal loans"))
+                    .addToContents(new Content(title:"Header Name", key: "header_name", value: "Loan Adviser", iterationKey: "", iterationIndex: 0))
+                    .addToContents(new Content(title:"Slogan", key: "header_slogan", value: "Rate and review personal loans", iterationKey: "", iterationIndex: 0))
                     .save()
-                new PageComponent(friendlyName: "Welcome Text", page: home, component: text).save()
+
+                new PageComponent(friendlyName: "Welcome Text", page: home, component: text)
                     .addToContents(new Content(title:"Text", key: "text", value: "Welcome to Loan Adviser. Don't forget to give us your feedback in the Submit a Comment section!"))
                     .save()
                     

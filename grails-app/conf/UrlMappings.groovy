@@ -1,6 +1,7 @@
 class UrlMappings {
 
-	static mappings = {
+    static mappings = {
+
         "/" {
             view = '/index'
         }
@@ -22,26 +23,35 @@ class UrlMappings {
         "/admin/pages/$id" {
             controller = 'pages'
         }                
-        
+
         "/admin/pages/$id/save" {
             controller = 'pages'
             action = 'save'
         }
-        
+
         "/admin/pages/$id/delete" {
             controller = 'pages'
             action = 'delete'
         }          
-        
+
         "/admin/users" {
             controller = 'users'
         }              
+
+        /** ERRORS **/
+
         "500" {
             view = '/error' 
         }
         "404" {
             view = '/404'
         }
-        
-	}
+
+        /** AJAX **/
+
+        "/service/component/$id/$key**" {
+            controller = 'component'
+            action = 'backend'
+        }
+    }
 }

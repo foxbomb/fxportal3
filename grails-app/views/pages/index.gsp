@@ -103,7 +103,6 @@
         
         $("ul#page").on({'click' : function() {          
           
-          
           currentComponent = $(this).closest("li");
           
           var data = currentComponent.data();
@@ -113,8 +112,11 @@
           $('#component-key').text(data.general.key);
           $('#input-friendlyname').val(data.general.friendlyName);
 
+          $.ajax({url:'/service/component/' + data.general.id + '/' + escape(data.general.key)}).done(function(response) {
+            $("#modal-content").html(response);
+          });
+
           $("#edit-modal").modal();
-          
           
         }}, 'a.edit-component');
       
@@ -168,8 +170,6 @@
           
           $("form#page-components").find("input#data").val(JSON.stringify(data));
                     
-          console.log (data)
-          
         });
 
       });

@@ -6,6 +6,8 @@ import fxportal3.PageComponent
 import fxportal3.system.GenericSecurityController
 
 import grails.converters.*
+import fxportal3.ComponentService
+import fxportal3.Content
 
 class PagesController extends GenericSecurityController {
     
@@ -95,9 +97,7 @@ class PagesController extends GenericSecurityController {
                 
         try {
             def selectedId = params.id.toLong()
-            println("selected id is $selectedId")
             if (selectedId > 0) {
-                println("deleting")
                 page = Page.get(selectedId)
                 page.delete();
             }

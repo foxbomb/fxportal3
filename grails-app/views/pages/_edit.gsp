@@ -1,3 +1,9 @@
+<!--
+
+* Pressing enter should save or be disabled
+* Clicking outside the box should not remove the box
+
+-->
 <div id="edit-modal" class="modal hide fade">
   <div class="modal-header">    
     <button type="button" class="modal-close close" aria-hidden="true">&times;</button>
@@ -12,6 +18,8 @@
           <input type="text" id="input-friendlyname">
           <span class="help-block">To make it easier for you to tell them apart.</span>
         </div>        
+      </div>
+      <div id="modal-content">
       </div>
     </form>
   </div>

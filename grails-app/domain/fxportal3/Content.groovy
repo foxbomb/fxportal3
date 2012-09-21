@@ -11,6 +11,8 @@ class Content {
     
     String title
     String key
+    String iterationKey
+    int    iterationIndex
     String value
     
 }

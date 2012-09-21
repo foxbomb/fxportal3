@@ -13,7 +13,7 @@
 
 grails.project.groupId = com.foxbomb // change this to alter the default package name and Maven publishing destination
 grails.app.context = "/"
-grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
+grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       xml: ['text/xml', 'application/xml'],
