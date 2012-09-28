@@ -8,8 +8,6 @@ class ComponentService {
     
     def getConfiguration(key) {
         
-        println("Initiating Component:" + key)
-        
         Class scriptClass = getClass().classLoader.loadClass('com.foxbomb.fxportal3.component.text.properties')
         
         if (scriptClass) {

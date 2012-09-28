@@ -2,6 +2,8 @@
   <head>
     <title>Pages</title>
     <script type="text/javascript" src="${resource(dir: '/js', file: 'jquery-ui-1.8.23.custom.min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: '/js', file: 'jquery.serializeForm.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: '/js', file: 'jquery.deserializeForm.js')}"></script>
     <style>
       #sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
       #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
@@ -114,9 +116,17 @@
 
           $.ajax({url:'/service/component/' + data.general.id + '/' + escape(data.general.key)}).done(function(response) {
             $("#modal-content").html(response);
+            
+            
+            
+            if (data.general.fields) {
+              $("#component-form").deserializeForm(data.general.fields);
+            }
+            
+            $("#edit-modal").modal();
           });
 
-          $("#edit-modal").modal();
+          
           
         }}, 'a.edit-component');
       
@@ -133,6 +143,7 @@
           var data = currentComponent.data();
           data.general.friendlyName = $('#input-friendlyname').val();
           data.general.edited = true;
+          data.general.fields = $("#component-form").serializeForm();
           currentComponent.data(data);
           currentComponent.find("span.friendly-name").text(data.general.friendlyName);
           
@@ -168,7 +179,12 @@
           data.updated = updated
           data.removed = removed
           
-          $("form#page-components").find("input#data").val(JSON.stringify(data));
+          var dataString = JSON.stringify(data);
+          
+          $("form#page-components").find("input#data").val(dataString);
+          
+          console.log (dataString);
+          evt.preventDefault();
                     
         });
 

@@ -11,7 +11,7 @@
     <small><span id="component-key"></small>
   </div>
   <div class="modal-body">
-    <form class="form-horizontal">
+    <form id="component-form" class="form-horizontal">
       <div class="control-group">
         <label class="control-label" for="input-friendlyname">Friendly Name</label>
         <div class="controls">
