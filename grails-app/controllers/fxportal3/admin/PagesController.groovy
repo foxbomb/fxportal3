@@ -137,9 +137,6 @@ class PagesController extends GenericSecurityController {
                 content.value = field.value
                 content.save()
             }
-
-            
         }
-        
     }
 }

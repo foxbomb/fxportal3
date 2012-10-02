@@ -17,6 +17,11 @@ class ComponentController {
             
             if (component) {
                 def config = componentService.getConfiguration(params.key);
+                
+                if (params.id) {
+                    config = componentService.overrideDefaults(params.id, config)
+                }
+                
                 render(view:'/components/backend/automatic', model:[title:component.title, config:config])
             } else {
                 render("Component Not Found")

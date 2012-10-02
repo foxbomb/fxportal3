@@ -19,4 +19,23 @@ class ComponentService {
        
     }
     
+    def overrideDefaults(id, config) {
+
+        
+        
+        if (id.isNumber()) {
+            def contents = Content.withCriteria {eq "pageComponent.id", id.toLong()}
+            
+            contents.each { field ->
+                
+                config.fieldDetail[field.key].default = field.value
+            
+            }
+        }            
+            
+            
+        
+        return config;  
+    }
+    
 }
