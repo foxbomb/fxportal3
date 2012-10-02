@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="navbar-inner">
       <!--<a class="brand" href="#">fxPortal 3.0 CMS Admin</a> -->
-      <a class="brand" href="#">Loan Adviser CMS Admin</a>
+      <a class="brand" href="#">fxPortal 3.0 CMS Admin</a>
       <ul id="adminmenu" class="nav">      
         <li class="${controllerName == 'pages' ? 'active' : ""}"><g:link controller="pages">Pages</g:link></li>
         <li class="${controllerName == 'users' ? 'active' : ""}"><g:link controller="users">Users</g:link></li>

@@ -10,6 +10,8 @@ class GenericSecurityController {
             flash.message = "Your session has expired - please log in again"
             flash.type="warning"
             redirect (controller: 'authentication')
+            return false;
         }
+        return true;
     }
 }

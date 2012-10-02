@@ -34,6 +34,7 @@
         
         var currentId = 0;
         var currentComponent = null;
+        var componentHtmlCache = [];
         
         var dropHereDisplayed = false;
         checkDisplay();
@@ -72,7 +73,7 @@
 
               var data = {};
               data.general = {}
-              data.general.id = null;              
+              data.general.id = 'temp-' + currentId++;
               data.general.new = true;
               data.general.edited = false;
               data.general.title = elem.attr("data-component-title");
@@ -113,18 +114,25 @@
           $('#component-friendlyname').text(data.general.friendlyName);
           $('#component-key').text(data.general.key);
           $('#input-friendlyname').val(data.general.friendlyName);
+          
+          if (componentHtmlCache[data.general.id]) {
+            console.log ("already cached");
+            $("#modal-content").html(componentHtmlCache[data.general.id]);
+              if (data.general.fields) {
+                $("#component-form").deserializeForm(data.general.fields);
+              }
 
-          $.ajax({url:'/service/component/' + data.general.id + '/' + escape(data.general.key)}).done(function(response) {
-            $("#modal-content").html(response);
-            
-            
-            
-            if (data.general.fields) {
-              $("#component-form").deserializeForm(data.general.fields);
-            }
-            
             $("#edit-modal").modal();
-          });
+          } else {
+            console.log ("fetching...")
+            $.ajax({url:'/service/component/' + data.general.id + '/' + escape(data.general.key)}).done(function(response) {
+              $("#modal-content").html(response);
+              componentHtmlCache[data.general.id] = response;
+              $("#edit-modal").modal();
+            });
+            
+          }
+
 
           
           
@@ -144,6 +152,11 @@
           data.general.friendlyName = $('#input-friendlyname').val();
           data.general.edited = true;
           data.general.fields = $("#component-form").serializeForm();
+          console.log ("Saving HTML");
+          console.log ("id " + data.general.id)
+          console.log ("html")
+          
+          componentHtmlCache[data.general.id] = $("#modal-content").html();
           currentComponent.data(data);
           currentComponent.find("span.friendly-name").text(data.general.friendlyName);
           
@@ -183,8 +196,8 @@
           
           $("form#page-components").find("input#data").val(dataString);
           
-          console.log (dataString);
-          evt.preventDefault();
+          //console.log (dataString);
+          //evt.preventDefault();
                     
         });
 

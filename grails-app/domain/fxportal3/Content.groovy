@@ -9,7 +9,6 @@ class Content {
 
     static belongsTo = [pageComponent: PageComponent]
     
-    String title
     String key
     String iterationKey
     int    iterationIndex

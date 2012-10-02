@@ -16,9 +16,9 @@ class PagesController extends GenericSecurityController {
     def index() {
         
         authorize();
-        def page = new Page();
-        page.id = 0
         
+        def page = new Page();
+        page.id = 0        
         def selectedId = 0;
         def pageComponents = null;
         
@@ -41,12 +41,14 @@ class PagesController extends GenericSecurityController {
     
     def save() {
         
-        authorize();       
+        if (!authorize()) {
+            return;
+        }       
         def page
         
         // Check if the page exists. No, create a new one. Yes, update it.
         
-        if (params.pageId.toInteger() == 0) {            
+        if (params.pageId.toInteger() == 0) { 
             page = new Page(title: params.title, url: params.url)
             page.save(flush: true)
             params.id = page.id
@@ -68,31 +70,36 @@ class PagesController extends GenericSecurityController {
         
         data.updated.eachWithIndex() {pageComponent, index -> 
             if (pageComponent.new) {
-                new PageComponent(friendlyName: pageComponent.friendlyName, page: page, component: Component.findByKey(pageComponent.key), order: index).save()
+                def obj = new PageComponent(friendlyName: pageComponent.friendlyName, page: page, component: Component.findByKey(pageComponent.key), order: index)
+                obj.save(flush:true)                
+                updateComponentData(obj, pageComponent.fields)
             } else {
-                
                 def obj = PageComponent.get(pageComponent.id)
                 obj.friendlyName = pageComponent.friendlyName
                 obj.order = index
-                obj.save()
-                
+                obj.save(flush:true)
+                updateComponentData(obj, pageComponent.fields)                
             }
         };
         
         // loop through deleted
         
         data.removed.each() {            
-            def obj = PageComponent.get(it)
-            obj.delete()
-        }
-        
+            if (!it instanceof String) {
+                def obj = PageComponent.get(it)
+                obj.delete()
+            }
+            
+        }        
 
         redirect action: "index", id: params.id
     }    
     
     def delete() {
 
-        authorize();
+        if (!authorize()) {
+            return;
+        }    
         def page = new Page();
                 
         try {
@@ -110,6 +117,29 @@ class PagesController extends GenericSecurityController {
         
         redirect action: "index", id: 0
         
+        
+    }
+    
+    // HELPERS - THESE ARE NOT ACTIONS
+    
+    private void updateComponentData(pageComponent, fields) {
+        
+        fields.eachWithIndex() {field, index ->
+            
+            def content = Content.withCriteria(uniqueResult: true) {
+                eq "pageComponent.id", pageComponent.id
+                eq "key", field.key
+            }           
+            
+            if (!content) {
+                pageComponent.addToContents(new Content(key:field.key, value:field.value, iterationKey:"", iterationIndex:0)).save()
+            } else {
+                content.value = field.value
+                content.save()
+            }
+
+            
+        }
         
     }
 }
