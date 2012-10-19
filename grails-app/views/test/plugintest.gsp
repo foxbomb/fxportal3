@@ -4,3 +4,5 @@
 <g:else>
   ${component.contents.text}
 </g:else>
+
+${mark}

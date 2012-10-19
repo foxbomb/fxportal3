@@ -25,11 +25,8 @@ class PagesController extends GenericSecurityController {
         try {
             selectedId = params.id.toLong()
             if (selectedId > 0) {
-                pageComponents = PageComponent.withCriteria {
-                    eq "page.id", selectedId
-                    order "order", "asc"
-                }
                 page = Page.get(selectedId)
+                pageComponents = PageComponent.findAllByPage(page, [sort: "order", order: "asc"]);
             }
         } catch (Exception ex) {
             // Do not throw an exception. Just display the index page.

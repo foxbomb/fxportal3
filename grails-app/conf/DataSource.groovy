@@ -20,7 +20,7 @@ environments {
         dataSource {
             username = "root"
             password = ""
-            dbCreate = "create-drop"
+            dbCreate = "update"
             url = "jdbc:mysql://localhost/fxportal3"            
         }
     }

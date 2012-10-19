@@ -12,9 +12,7 @@ class ContentController {
         
         if (page) {
             
-            def pageComponents = PageComponent.findAllByPage(page);
-            
-            println (pageComponents)
+            def pageComponents = PageComponent.findAllByPage(page, [sort: "order", order: "asc"]);
             
             render(view: "/templates/default", model: [title:page.title, components:pageComponents])
             

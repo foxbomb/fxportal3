@@ -28,7 +28,6 @@ class Contents {
     public Map<String, String> getMap() {
         def map = new HashMap<String, String>()
         list.each() {
-            println("looping")
             map.put(it.key, it.value)
         }        
         return map
