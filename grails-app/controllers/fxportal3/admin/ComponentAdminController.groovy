@@ -2,7 +2,7 @@ package fxportal3.admin
 
 import fxportal3.Component
 
-class ComponentController {
+class ComponentAdminController {
 
     def componentService
     

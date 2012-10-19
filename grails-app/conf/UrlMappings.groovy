@@ -32,7 +32,7 @@ class UrlMappings {
             controller = 'users'
         }
         "/service/component/$id/$key**" {
-            controller = 'component'
+            controller = 'componentAdmin'
             action = 'backend'
         }        
         "/plugin-test" {
