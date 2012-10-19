@@ -12,5 +12,6 @@ class PageComponent {
     
     String friendlyName
     int    order
+    Map    content
 
 }

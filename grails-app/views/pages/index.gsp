@@ -122,13 +122,15 @@
                 $("#component-form").deserializeForm(data.general.fields);
               }
 
-            $("#edit-modal").modal();
+            $("#edit-modal").modal({'backdrop':'static', 'keyboard':'false'});
           } else {
-            console.log ("fetching...")
+            
+            $("#ajax-screen").fadeIn(100);            
             $.ajax({url:'/service/component/' + data.general.id + '/' + escape(data.general.key)}).done(function(response) {
               $("#modal-content").html(response);
               componentHtmlCache[data.general.id] = response;
-              $("#edit-modal").modal();
+              $("#edit-modal").modal({'backdrop':'static', 'keyboard':false});
+              $("#ajax-screen").fadeOut(100);            
             });
             
           }
@@ -319,7 +321,8 @@
       </div>
     </section>
     <div>
-      <g:include view="/pages/_edit.gsp"></g:include>
+      <g:include view="/pages/_edit.gsp" />
     </div>
+    <g:include view="/pages/_ajax.gsp"/>
   </body>
 </html>

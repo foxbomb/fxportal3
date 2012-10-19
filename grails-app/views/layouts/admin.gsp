@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css/', file: 'default.css')}">
     <script type="text/javascript" src="${resource(dir: '/js', file: 'jquery-1.8.0.min.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'bootstrap/js', file: 'bootstrap.min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: '/js', file: 'application.js')}"></script>
     
     <g:layoutHead/>
   </head>

@@ -27,7 +27,3 @@
         </div>      
       </g:each>    
   </div>
-
-<!--
-<markdown:renderHtml>***test*** **test** *test*</markdown:renderHtml>
--->

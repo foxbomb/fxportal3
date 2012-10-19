@@ -3,7 +3,7 @@
     <title>Login</title>
   </head>
   <body>
-    <g:include view="includes/adminheader.gsp"/>  
+    <g:include view="includes/adminheader.gsp"/>
     <section>
       <h2>Login</h2>
       <g:if test="${flash.message}">

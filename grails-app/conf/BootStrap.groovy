@@ -24,28 +24,18 @@ class BootStrap {
                 // Create Some Pages
             
                 def home = new Page(title: "home", url: "/").save()
-                
-                new Page(title: "I want a loan", url: "/get-a-loan").save()
-                new Page(title: "Choose a lender", url: "/choose-a-lender").save()
-                new Page(title: "Submit a comment", url: "/submit-a-comment").save()
-                
+                                
                 // Create Some Components
                 
                 def text = new Component(title: "Text", key: "com.foxbomb.fxportal3.component.text").save()
-                def menu = new Component(title: "Menu", key: "com.foxbomb.fxportal3.component.menu").save()    
-                def header = new Component(title: "Header", key: "com.foxbomb.fxportal3.component.header").save()
-                
-                new Component(title: "Html", key: "com.foxbomb.fxportal3.component.html").save()                
-                new Component(title: "Footer", key: "com.foxbomb.fxportal3.component.footer").save()
-                new Component(title: "Quiz", key: "com.foxbomb.fxportal3.component.quiz").save()
-                new Component(title: "FAQ", key: "com.foxbomb.fxportal3.component.faq").save()
-                new Component(title: "List", key: "com.foxbomb.fxportal3.component.list").save()
                 
                 // Associate some Components to some Pages and give them some Content
                             
-                new PageComponent(friendlyName: "Loan Adviser", page: home, component: header)
-                    .addToContents(new Content(title:"Header Name", key: "header_name", value: "Loan Adviser", iterationKey: "", iterationIndex: 0))
-                    .addToContents(new Content(title:"Slogan", key: "header_slogan", value: "Rate and review personal loans", iterationKey: "", iterationIndex: 0))
+                new PageComponent(friendlyName: "Introduction", page: home, component: text)
+                    .addToContents(new Content(key: "text", value: "This is the default text that you can change.", iterationKey: "", iterationIndex: 0))
+                    .addToContents(new Content(key: "markdown", value: "yes", iterationKey: "", iterationIndex: 0))
+                    .addToContents(new Content(key: "paginate", value: "yes", iterationKey: "", iterationIndex: 0))
+                    .addToContents(new Content(key: "wordsperpage", value: "50", iterationKey: "", iterationIndex: 0))
                     .save()
 
                 new PageComponent(friendlyName: "Welcome Text", page: home, component: text)
