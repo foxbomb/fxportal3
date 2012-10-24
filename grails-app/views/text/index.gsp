@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Pages</title>
+    <title>Components</title>
   </head>
   <body>
     <g:include view="includes/adminmenu.gsp"/>
@@ -10,7 +10,7 @@
       </g:if>  
     </secton>    
     <section>
-      <h2>Users</h2>
+      <h2>Components</h2>
     </section>
   </body>
 </html>
