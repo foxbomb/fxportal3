@@ -1,13 +1,13 @@
-package fxportal3.content
+package fxportal3.frontend
 
 import fxportal3.*
 
-class ContentController {
+class PageController {
 
     def index() {
         
         // We really need to lose the "/go"
-        def path = request.forwardURI.substring(3);
+        def path = request.forwardURI
         def page = Page.findByUrl(path ? path : "/")
         
         if (page) {

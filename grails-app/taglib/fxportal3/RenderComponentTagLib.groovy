@@ -9,7 +9,7 @@ class RenderComponentTagLib {
     
     def renderComponent = {attrs, body ->
         
-        def mapping = grailsUrlMappingsHolder.match("/component/" + attrs.key + "/" + attrs.id) 
+        def mapping = grailsUrlMappingsHolder.match("/service/component/" + attrs.key + "/" + attrs.id) 
 
         if (mapping) {
             

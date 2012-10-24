@@ -126,7 +126,7 @@
           } else {
             
             $("#ajax-screen").fadeIn(100);            
-            $.ajax({url:'/service/component/' + data.general.id + '/' + escape(data.general.key)}).done(function(response) {
+            $.ajax({url:'/service/admin/component/' + escape(data.general.key) + '/' + data.general.id}).done(function(response) {
               $("#modal-content").html(response);
               componentHtmlCache[data.general.id] = response;
               $("#edit-modal").modal({'backdrop':'static', 'keyboard':false});
@@ -317,7 +317,12 @@
         <div class="span3 cms-panel">
           <h3>4. Preview</h3>
           <div class="iPhone">
-            <iframe src="/go${page.url}"></iframe>
+            <g:if test="${!page.id}">
+              <iframe src="about:blank"></iframe>
+            </g:if>
+            <g:else>
+              <iframe src="${page.url}"></iframe>
+            </g:else>
           </div>
         </div>
 

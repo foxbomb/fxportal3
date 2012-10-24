@@ -5,6 +5,8 @@
       <a class="brand" href="#">fxPortal 3.0 CMS Admin</a>
       <ul id="adminmenu" class="nav">      
         <li class="${controllerName == 'pages' ? 'active' : ""}"><g:link controller="pages">Pages</g:link></li>
+        <li class="${controllerName == 'styles' ? 'active' : ""}"><g:link controller="styles">Styles</g:link></li>
+        <li class="${controllerName == 'components' ? 'active' : ""}"><g:link controller="components">Components</g:link></li>
         <li class="${controllerName == 'users' ? 'active' : ""}"><g:link controller="users">Users</g:link></li>
         <li><g:link id="logout" controller="authentication" action="logout">Logout</g:link></li>
       </ul>

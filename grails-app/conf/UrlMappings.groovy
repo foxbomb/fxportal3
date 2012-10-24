@@ -28,22 +28,34 @@ class UrlMappings {
             controller = 'pages'
             action = 'delete'
         }          
+        "/admin/styles" {
+            controller = 'styles'
+        }
+        "/admin/components" {
+            controller = 'components'
+        }
         "/admin/users" {
             controller = 'users'
         }
-        "/service/component/$id/$key**" {
+        "/service/admin/component/$key/$id" {
             controller = 'componentAdmin'
             action = 'backend'
         }        
-        "/component/com.foxbomb.fxportal3.component.text/$id" {
+        "/service/component/com.foxbomb.fxportal3.component.text/$id" {
             controller = 'text'
         }
-        "/go/**" {
-            controller = 'content'
+        "/**" {
+            controller = 'page'
         }
-        "/go**" {
-            controller = 'content'
-        }        
+        "/" {
+            controller = 'page'
+        }      
+//        "/go/**" {
+//            controller = 'content'
+//        }
+//        "/go**" {
+//            controller = 'content'
+//        }                
         "500" {
             view = '/error' 
         }
