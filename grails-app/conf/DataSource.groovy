@@ -26,12 +26,13 @@ environments {
     }
     production {
         dataSource {
-            username = "b5149526887d72"
-            password = "d6f06a38"
-            dbCreate = "create-drop"
+            username = "b32fe4f8d41690"
+            password = "e11c648f"
+            dbCreate = "update"
             logSql = true
             formatSql = true
-            url = "jdbc:mysql://us-cdbr-east.cleardb.com/heroku_c51a83649879755"                        
+            url = "jdbc:mysql://us-cdbr-east-02.cleardb.com/heroku_61a3b1a094f3e54"   
+            
         }
     }
 }

@@ -82,10 +82,11 @@ class PagesController extends GenericSecurityController {
         // loop through deleted
         
         data.removed.each() {            
-            if (!it instanceof String) {
-                def obj = PageComponent.get(it)
+            
+            try {            
+                def obj = PageComponent.get(it.toInteger())
                 obj.delete()
-            }
+            } catch (Exception ex) {}
             
         }        
 
