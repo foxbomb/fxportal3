@@ -8,11 +8,10 @@ class RenderComponentTagLib {
     def grailsUrlMappingsHolder
     
     def renderComponent = {attrs, body ->
-        //def mapping = grailsUrlMappingsHolder.match("/components/" + attrs.key) 
-        def mapping = grailsUrlMappingsHolder.match("/plugin-test")
+        
+        def mapping = grailsUrlMappingsHolder.match("/component/" + attrs.key + "/" + attrs.id) 
+
         if (mapping) {
-            
-            flash.pageComponentId = attrs.id
             
             out << WebUtils.includeForUrlMappingInfo(request, response, mapping, [:])?.content
             

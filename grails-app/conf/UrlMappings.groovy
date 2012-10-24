@@ -35,8 +35,8 @@ class UrlMappings {
             controller = 'componentAdmin'
             action = 'backend'
         }        
-        "/plugin-test" {
-            controller = 'test'
+        "/component/com.foxbomb.fxportal3.component.text/$id" {
+            controller = 'text'
         }
         "/go/**" {
             controller = 'content'

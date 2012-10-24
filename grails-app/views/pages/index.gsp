@@ -316,6 +316,9 @@
         <!-- 4. Preview -->
         <div class="span3 cms-panel">
           <h3>4. Preview</h3>
+          <div class="iPhone">
+            <iframe src="/go${page.url}"></iframe>
+          </div>
         </div>
 
       </div>
